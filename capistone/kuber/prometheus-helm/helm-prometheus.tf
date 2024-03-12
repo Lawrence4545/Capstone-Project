@@ -1,12 +1,12 @@
 data "aws_eks_node_group" "eks-node-group" {
-  cluster_name = "law-dev-eks"
+  cluster_name = "eks"
   node_group_name = "law-dev-eks-ng-public"
 }
 
 resource "time_sleep" "wait_for_kubernetes" {
 
     depends_on = [
-        data.aws_eks_cluster.law-dev-eks
+        data.aws_eks_cluster.eks
     ]
 
     create_duration = "20s"

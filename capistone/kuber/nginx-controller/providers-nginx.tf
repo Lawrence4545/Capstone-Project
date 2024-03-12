@@ -18,11 +18,11 @@ terraform {
 }
 
 
-data "aws_eks_cluster" "law-dev-eks" {
-  name = "law-dev-eks"
+data "aws_eks_cluster" "eks" {
+  name = "eks"
 }
-data "aws_eks_cluster_auth" "law-dev-eks_auth" {
-  name = "law-dev-eks_auth"
+data "aws_eks_cluster_auth" "eks_auth" {
+  name = "eks_auth"
 }
 
 
@@ -49,9 +49,9 @@ provider "kubernetes" {
 
 provider "kubectl" {
    load_config_file = false
-   host                   = data.aws_eks_cluster.law-dev-eks.endpoint
-   cluster_ca_certificate = base64decode(data.aws_eks_cluster.law-dev-eks.certificate_authority[0].data)
-   token                  = data.aws_eks_cluster_auth.law-dev-eks_auth.token
+   host                   = data.aws_eks_cluster.eks.endpoint
+   cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority[0].data)
+   token                  = data.aws_eks_cluster_auth.eks_auth.token
    config_path = "~/.kube/config"
 }
 
